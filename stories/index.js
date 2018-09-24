@@ -50,6 +50,16 @@ storiesOf('Popper', module)
       </Text>
     </Popper>
   ))
+  .add('bottom, no flip', () => (
+    <Popper
+      popoutComponent={"popped out"}
+      enableFlip={false}
+    >
+      <Text>
+        Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cras mattis consectetur purus sit amet fermentum.
+      </Text>
+    </Popper>
+  ))
 
 storiesOf('Tooltip', module)
   .add('top', () => (

@@ -15,7 +15,8 @@ type Props = {
   isOpen: boolean,
   placement: Placement,
   popoutComponent: any,
-}
+  flip: any,
+};
 
 type PopperData = {
   offsets: {
@@ -27,7 +28,7 @@ type PopperData = {
     arrow: {
       left: number,
       top: number,
-    }
+    },
   },
 };
 
@@ -38,63 +39,71 @@ type Modifiers = {
   arrow?: {
     element: HTMLElement,
   },
-}
+  flip?: {
+    enabled: boolean,
+  },
+};
 
 type State = {
   data: PopperData,
-}
+};
 
 class Popper extends PureComponent {
-  props: Props
-  state: State
-  state = {}
+  props: Props;
+  state: State;
+  state = {};
 
-  _popper = null
-  _popperParentNode = null
-  _popoutNode = null
-  _arrow = null
+  _popper = null;
+  _popperParentNode = null;
+  _popoutNode = null;
+  _arrow = null;
 
   static defaultProps = {
     arrowColor: '#FFC107',
     arrowSize: 5,
     isOpen: true,
     placement: Placements.BOTTOM,
-  }
+    enableFlip: true,
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     this.instantiatePopper();
   }
 
-  componentWillReceiveProps () {
+  componentWillReceiveProps() {
     if (!this._popper) {
       this.instantiatePopper();
     }
     this.updatePopper();
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this._popper) {
       this._popper.destroy();
     }
   }
 
-  instantiatePopper () {
-    const modifiers : Modifiers = {
-      applyStyle: { enabled: false},
+  instantiatePopper() {
+    const modifiers: Modifiers = {
+      applyStyle: { enabled: false },
+      flip: {
+        enabled: this.props.enableFlip,
+      },
     };
+    console.log(modifiers);
     if (this.props.hasArrow && this._arrow) {
       modifiers.arrow = { element: this._arrow };
     }
     this._popper = new PopperJs(this._popperParentNode, this._popoutNode, {
       placement: this.props.placement,
       modifiers,
-      onCreate: (data) => this.setState({ data }),
-      onUpdate: (data) => this.setState({ data }),
+      onCreate: data => this.setState({ data }),
+      onUpdate: data => this.setState({ data }),
     });
     this.updatePopper();
   }
 
-  updatePopper () {
+  updatePopper() {
     requestAnimationFrame(() => {
       if (this._popper) {
         this._popper.update();
@@ -102,7 +111,7 @@ class Popper extends PureComponent {
     });
   }
 
-  getPopperStyle (data: PopperData) {
+  getPopperStyle(data: PopperData) {
     if (!data) {
       return {};
     }
@@ -115,12 +124,12 @@ class Popper extends PureComponent {
       WebkitTransform: transform,
       top: 0,
       left: 0,
-      display: this.props.isOpen ? 'block' :  'none',
+      display: this.props.isOpen ? 'block' : 'none',
       ...this.getPopperMargin(),
     };
   }
 
-  getPopperMargin () {
+  getPopperMargin() {
     const { props } = this;
     if (!props.hasArrow) {
       return {};
@@ -137,7 +146,7 @@ class Popper extends PureComponent {
     return {};
   }
 
-  getArrowStyle (data: PopperData) {
+  getArrowStyle(data: PopperData) {
     if (!data) {
       return {};
     }
@@ -164,27 +173,28 @@ class Popper extends PureComponent {
     }
   }
 
-  render () {
+  render() {
     const { props, state } = this;
+
     return (
       <div>
         <div
-          ref={(el) => {
+          ref={el => {
             this._popperParentNode = el;
           }}
         >
           {props.children}
         </div>
         <div
-          ref={(el) => {
+          ref={el => {
             this._popoutNode = el;
           }}
           style={this.getPopperStyle(state.data)}
         >
           {props.popoutComponent}
-          {props.hasArrow &&
+          {props.hasArrow && (
             <div
-              ref={(el) => {
+              ref={el => {
                 this._arrow = el;
               }}
               style={this.getArrowStyle(state.data)}
@@ -195,7 +205,7 @@ class Popper extends PureComponent {
                 color={props.arrowColor}
               />
             </div>
-          }
+          )}
         </div>
       </div>
     );
