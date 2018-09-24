@@ -90,7 +90,6 @@ class Popper extends PureComponent {
         enabled: this.props.enableFlip,
       },
     };
-    console.log(modifiers);
     if (this.props.hasArrow && this._arrow) {
       modifiers.arrow = { element: this._arrow };
     }

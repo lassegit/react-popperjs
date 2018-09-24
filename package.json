@@ -1,6 +1,6 @@
 {
-  "name": "react-popperjs",
-  "version": "0.0.3",
+  "name": "react-popperjs2",
+  "version": "0.0.2",
   "description": "React wrapper for PopperJS",
   "main": "lib/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/victorias/react-popperjs.git"
+    "url": "git+https://github.com/lassegit/react-popperjs2.git"
   },
   "keywords": [
     "react",
@@ -23,12 +23,12 @@
     "tooltip",
     "react-component"
   ],
-  "author": "victorias",
+  "author": "lassegit",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/victorias/react-popperjs/issues"
+    "url": "https://github.com/lassegit/react-popperjs2/issues"
   },
-  "homepage": "https://github.com/victorias/react-popperjs#readme",
+  "homepage": "https://github.com/lassegit/react-popperjs2#readme",
   "peerDependencies": {
     "react": "0.14.x || ^15.0.0",
     "react-dom": "0.14.x || ^15.0.0"

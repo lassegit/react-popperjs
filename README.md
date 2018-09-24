@@ -70,3 +70,5 @@ type Props = {
 ## Examples
 
 This project uses [React Storybook](https://github.com/storybooks/react-storybook) for demos and examples. Examples are located in `stories/index.js` and can be run with `npm run storybook`
+
+Based on: https://github.com/victorias/react-popperjs
